@@ -1,0 +1,437 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Surfaces: Deep black / graphite (premium dark) ── */
+  --color-onyx-950: #0a0c10;
+  --color-onyx-900: #10141a;
+  --color-onyx-800: #161b23;
+  --color-onyx-700: #1e242e;
+
+  /* ── Text: clean white + soft gray scale ── */
+  --color-white: #f8fafc;
+  --color-slate-100: #f2f5f9;
+  --color-slate-200: #dbe1ea;
+  --color-slate-300: #b7c0cd;
+  --color-slate-400: #8f9aab;
+  --color-slate-500: #64707f;
+  --color-slate-600: #4b5563;
+
+  /* ── Accent: champagne gold (subtle, secondary only) ── */
+  --color-gold-200: #e6d3a8;
+  --color-gold-300: #d9bf85;
+  --color-gold-400: #c9a864;
+  --color-gold-500: #b08d4c;
+  --color-gold-600: #8c6e3a;
+  --color-gold-700: #68532c;
+
+  /* ── Accent: deep crimson red (selected emphasis) ── */
+  --color-crimson-300: #e05c5c;
+  --color-crimson-400: #d13b3b;
+  --color-crimson-500: #bf2c2c;
+  --color-crimson-600: #a02323;
+  --color-crimson-700: #841c1c;
+
+  /* ── Accent: refined electric blue (technology / interaction) ── */
+  --color-elec-200: #a8c4f5;
+  --color-elec-300: #6f9ef0;
+  --color-elec-400: #3f7ee8;
+  --color-elec-500: #2f63c9;
+  --color-elec-600: #264fa3;
+  --color-elec-700: #1d3d80;
+
+  --font-display: "Sora", "Tajawal", system-ui, sans-serif;
+  --font-body: "Inter", "Tajawal", system-ui, sans-serif;
+
+  --shadow-gold-glow: 0 0 24px rgba(201, 168, 100, 0.25);
+  --shadow-crimson-glow: 0 0 24px rgba(191, 44, 44, 0.35);
+  --shadow-elec-glow: 0 0 24px rgba(63, 126, 232, 0.4);
+}
+
+/* Arabic uses Tajawal for both display and body */
+:root[lang="ar"] {
+  --font-display: "Tajawal", "Sora", system-ui, sans-serif;
+  --font-body: "Tajawal", "Inter", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+}
+
+body {
+  background: #0a0c10;
+  color: #b7c0cd;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(63, 126, 232, 0.35);
+  color: #f8fafc;
+}
+
+/* Slim custom scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: #10141a;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(63, 126, 232, 0.65), rgba(191, 44, 44, 0.55));
+  border-radius: 8px;
+}
+
+/* Visible, electric-blue focus ring everywhere (a11y) */
+:focus-visible {
+  outline: 2px solid rgba(63, 126, 232, 0.9);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Utility: dark graphite glass surface ── */
+@utility glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+/* ── Utility: dark graphite form field ── */
+@utility field {
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.7rem 1rem;
+  font-size: 0.875rem;
+  color: #f2f5f9;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.field::placeholder {
+  color: #64707f;
+}
+.field:focus {
+  outline: none;
+  border-color: rgba(63, 126, 232, 0.65);
+  box-shadow: 0 0 0 3px rgba(63, 126, 232, 0.18);
+}
+
+/* ── Dark vignette over the 3D universe + video (text legibility) ── */
+.vignette {
+  background:
+    radial-gradient(ellipse 100% 74% at 50% 42%, transparent 44%, rgba(5, 7, 12, 0.5) 100%),
+    linear-gradient(180deg, rgba(5, 7, 12, 0.72) 0%, rgba(5, 7, 12, 0.2) 10%, rgba(5, 7, 12, 0.2) 86%, rgba(5, 7, 12, 0.92) 100%);
+}
+
+/* Floating glass data chip (hero foreground layer) */
+.float-chip {
+  animation: float-y 7s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Decorative orbit ring behind hero chips */
+.orbit-ring {
+  border: 1px dashed rgba(63, 126, 232, 0.35);
+  border-radius: 9999px;
+  animation: spin-slow 46s linear infinite;
+  will-change: transform;
+}
+
+/* ── Utility: electric-blue metal text (premium headline accents) ── */
+@utility text-elec-metal {
+  background: linear-gradient(135deg, #6f9ef0 0%, #3f7ee8 45%, #264fa3 70%, #a8c4f5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Utility: champagne gold metal text (tiny premium details only) ── */
+@utility text-gold-metal {
+  background: linear-gradient(135deg, #8c6e3a 0%, #d9bf85 45%, #68532c 70%, #e6d3a8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Utility: brand hairline gradient bar ── */
+@utility brand-bar {
+  background: linear-gradient(90deg, transparent, #3f7ee8 20%, #bf2c2c 50%, #3f7ee8 80%, transparent);
+}
+
+/* ── Utility: subtle blue grid backdrop ── */
+@utility bg-grid {
+  background-image:
+    linear-gradient(rgba(63, 126, 232, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(63, 126, 232, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 75%);
+}
+
+/* ── Utility: flip arrows in RTL ── */
+@utility rtl-flip {
+  transform: scaleX(-1);
+}
+
+/* Nav link underline */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #3f7ee8, #bf2c2c);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Shimmer sweep for the ANAE verification banner */
+.verify-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.verify-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 40%;
+  left: -50%;
+  background: linear-gradient(105deg, transparent, rgba(63, 126, 232, 0.22), transparent);
+  animation: shimmer 3.4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes shimmer {
+  0% {
+    left: -50%;
+  }
+  60%,
+  100% {
+    left: 135%;
+  }
+}
+
+/* Gentle floating animation for ambient orbs */
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-18px);
+  }
+}
+.animate-float-y {
+  animation: float-y 8s ease-in-out infinite;
+}
+
+/* Slow spin for decorative rings */
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin-slow {
+  animation: spin-slow 32s linear infinite;
+}
+
+/* CTA glow pulse */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.22;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
+}
+.btn-glow::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #3f7ee8, #bf2c2c);
+  opacity: 0.35;
+  filter: blur(14px);
+  z-index: -1;
+  animation: pulse-glow 2.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Location pin ping */
+@keyframes ping-ring {
+  0% {
+    transform: scale(0.4);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+.pin-dot::before {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border-radius: 9999px;
+  border: 2px solid rgba(191, 44, 44, 0.55);
+  animation: ping-ring 2.2s ease-out infinite;
+}
+
+/* Floating WhatsApp button ring pulse */
+@keyframes wa-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}
+.wa-float::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: rgba(52, 211, 153, 0.35);
+  animation: wa-ring 2.4s ease-out infinite;
+  pointer-events: none;
+}
+
+/* Tilt cards (3D depth on service cards) */
+.tilt-scene {
+  perspective: 1000px;
+}
+.tilt-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.2s ease-out;
+  will-change: transform;
+}
+.tilt-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(63, 126, 232, 0.16), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.tilt-card:hover::before {
+  opacity: 1;
+}
+.card-depth {
+  transform: translateZ(26px);
+  transform-style: preserve-3d;
+}
+
+/* Reveal-on-scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: none;
+}
+.reveal-d1 {
+  transition-delay: 0.12s;
+}
+.reveal-d2 {
+  transition-delay: 0.24s;
+}
+.reveal-d3 {
+  transition-delay: 0.36s;
+}
+
+/* Photo frame corner brackets */
+.corner {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 3px solid #bf2c2c;
+  z-index: 10;
+  filter: drop-shadow(0 0 6px rgba(191, 44, 44, 0.6));
+}
+.corner-tl {
+  top: -11px;
+  inset-inline-start: -11px;
+  border-inline-end: none;
+  border-bottom: none;
+  border-radius: 10px 0 0 0;
+}
+.corner-tr {
+  top: -11px;
+  inset-inline-end: -11px;
+  border-inline-start: none;
+  border-bottom: none;
+  border-radius: 0 10px 0 0;
+}
+.corner-bl {
+  bottom: -11px;
+  inset-inline-start: -11px;
+  border-inline-end: none;
+  border-top: none;
+  border-radius: 0 0 0 10px;
+}
+.corner-br {
+  bottom: -11px;
+  inset-inline-end: -11px;
+  border-inline-start: none;
+  border-top: none;
+  border-radius: 0 0 10px 0;
+}
+
+/* Catalog card entrance */
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.card-in {
+  animation: card-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Respect reduced motion globally */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
