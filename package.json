@@ -1,0 +1,8 @@
+{
+  "name": "ali-berrehail-website",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix site run build",
+    "postinstall": "npm --prefix site install"
+  }
+}

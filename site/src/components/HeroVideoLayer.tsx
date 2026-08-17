@@ -8,7 +8,7 @@ const smooth = (t: number) => t * t * (3 - 2 * t)
  * Light-premium hero atmosphere layer.
  *
  * Composition (bottom → top):
- *   1. Mol/hero-background.mp4 (full-bleed, muted, loop — desktop only)
+ *   1. Mol/hero-background.mp4 (full-bleed, muted, loop — all devices)
  *   2. soft ivory wash + warm gradient (keeps text legible on light)
  *   3. Three.js universe — transparent canvas paints the globe ON TOP
  *   4. vignette + foreground content
@@ -25,12 +25,30 @@ export default function HeroVideoLayer() {
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const innerRef = useRef<HTMLDivElement | null>(null)
 
-  const desktop = !(typeof window.matchMedia === 'function' && window.matchMedia('(pointer: coarse)').matches)
+  const coarse = typeof window.matchMedia === 'function' && window.matchMedia('(pointer: coarse)').matches
+
+  /* Autoplay robustness: iOS/Safari needs the muted flag set programmatically
+     before play(); a canplay retry covers slow starts. If autoplay is still
+     blocked the poster frame keeps the hero visual intact. */
+  useEffect(() => {
+    const v = videoRef.current
+    if (!v) return
+    v.muted = true
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      v.pause()
+      return
+    }
+    const tryPlay = () => {
+      const p = v.play()
+      if (p && typeof p.catch === 'function') p.catch(() => {})
+    }
+    tryPlay()
+    v.addEventListener('canplay', tryPlay)
+    return () => v.removeEventListener('canplay', tryPlay)
+  }, [])
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const coarse = window.matchMedia('(pointer: coarse)').matches
-    if (reduced && videoRef.current) videoRef.current.pause()
 
     const offScroll = onScrollTick(() => {
       const root = rootRef.current
@@ -79,22 +97,25 @@ export default function HeroVideoLayer() {
   return (
     <div ref={rootRef} className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
       <div ref={innerRef} className="absolute -inset-4 will-change-transform">
-        {desktop && (
-          <video
-            ref={videoRef}
-            className="size-full bg-onyx-950 object-cover"
-            src={ASSETS.heroVideo}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            tabIndex={-1}
-            onError={(e) => {
-              e.currentTarget.style.display = 'none'
-            }}
-          />
-        )}
+        {/* Portrait 540x960 source: cover + center crop keeps the central visual
+            area on portrait phones (only the side edges are cropped) and the
+            middle band on landscape phones. Poster covers pre-play/blocked states. */}
+        <video
+          ref={videoRef}
+          className="size-full bg-onyx-950 object-cover"
+          style={coarse ? { objectPosition: 'center' } : undefined}
+          src={ASSETS.heroVideo}
+          poster={ASSETS.heroPoster}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          tabIndex={-1}
+          onError={(e) => {
+            e.currentTarget.style.display = 'none'
+          }}
+        />
         {/* Dark graphite wash + gradient — keeps text legible, video stays visible */}
         <div className="absolute inset-0 bg-[#0a0c10]/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0c10]/85 via-[#0a0c10]/15 to-[#0a0c10]/55" />
