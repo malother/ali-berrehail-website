@@ -10,11 +10,8 @@ run_server.cmd
 # Local data (user submissions) — root-level only, preserves site/src/data/
 /data/
 
-# Root-level build output (from local dev) — preserves site/public/, site/dist/
+# Root-level build output (from local dev) — preserves site/public/ and site/dist/
 /public/
-
-# Local build output (Vercel will rebuild via @vercel/static-build)
-/site/dist/
 
 # Source maps and logs
 *.map
