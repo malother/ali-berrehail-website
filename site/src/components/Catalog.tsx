@@ -44,7 +44,7 @@ function CatalogCard({
       {/* Visual */}
       <div className="relative aspect-[4/3] overflow-hidden rounded-xl transition-transform duration-500 group-hover:scale-[1.03]">
         <CategoryVisual id={id} />
-        <span className="absolute right-3 top-3 rounded-full bg-[rgba(255,253,248,0.92)] px-2.5 py-1 text-[10px] font-bold tracking-wider text-[#262219] ring-1 ring-gold-500/40 shadow-sm" dir="ltr">
+        <span className="absolute right-3 top-3 rounded-full bg-[rgba(255,253,248,0.92)] px-2.5 py-1 text-[10px] font-bold tracking-wider text-[#262219] ring-1 ring-elec-500/40 shadow-sm" dir="ltr">
           {meta.origin}
         </span>
         <button
@@ -55,7 +55,7 @@ function CatalogCard({
           className={`absolute bottom-3 right-3 grid size-9 place-items-center rounded-full border backdrop-blur-sm transition-all duration-300 ${
             selected
               ? 'border-elec-500 bg-gradient-to-br from-elec-400 to-elec-600 text-white shadow-elec-glow'
-              : 'border-gold-500/40 bg-[rgba(255,253,248,0.92)] text-[#262219] hover:border-elec-500/70 hover:text-elec-500'
+              : 'border-elec-500/40 bg-[rgba(255,253,248,0.92)] text-[#262219] hover:border-elec-500/70 hover:text-elec-500'
           }`}
         >
           {selected ? <IconCheck className="size-4" /> : <span className="text-sm font-bold">+</span>}

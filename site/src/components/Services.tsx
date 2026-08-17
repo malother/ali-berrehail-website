@@ -6,7 +6,7 @@ import { IconArrow, IconCheck, IconUsers, IconChart, IconTarget, IconSpark, Icon
 
 /* Accent alternation for a premium rhythm */
 const ACCENTS = [
-  { line: 'via-gold-500/80', icon: 'from-gold-400/20 to-gold-600/20 text-gold-400 ring-gold-500/30', title: 'text-gold-400/90', cta: 'text-gold-300 hover:text-gold-200', check: 'text-gold-400' },
+  { line: 'via-elec-500/80', icon: 'from-elec-400/20 to-elec-600/20 text-elec-400 ring-elec-500/30', title: 'text-elec-400/90', cta: 'text-elec-300 hover:text-elec-200', check: 'text-elec-400' },
   { line: 'via-crimson-500/80', icon: 'from-crimson-500/20 to-crimson-700/20 text-crimson-400 ring-crimson-500/30', title: 'text-crimson-400/90', cta: 'text-crimson-400 hover:text-crimson-300', check: 'text-crimson-400' },
 ]
 
@@ -23,14 +23,14 @@ export default function Services() {
       <div className="mx-auto max-w-7xl px-6">
         {/* Section header */}
         <div className="mx-auto max-w-2xl text-center">
-          <Reveal className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.3em] text-gold-500">
-            <span className="h-px w-8 bg-gold-500" aria-hidden="true" />
+          <Reveal className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.3em] text-elec-400">
+            <span className="h-px w-8 bg-elec-500" aria-hidden="true" />
             {d.services.label}
-            <span className="h-px w-8 bg-gold-500" aria-hidden="true" />
+            <span className="h-px w-8 bg-elec-500" aria-hidden="true" />
           </Reveal>
           <Reveal delay={1}>
             <h2 className="mt-5 font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl">
-              {d.services.t1} <span className="text-gold-metal">{d.services.t2}</span>
+              {d.services.t1} <span className="text-elec-metal">{d.services.t2}</span>
             </h2>
           </Reveal>
           <Reveal delay={2}>
@@ -90,7 +90,7 @@ export default function Services() {
           <div className="mt-14 flex flex-wrap items-center justify-center gap-3 text-sm text-slate-400">
             {d.services.guarantees.map((g) => (
               <span key={g} className="glass inline-flex items-center gap-2 rounded-full px-5 py-2.5">
-                <IconCheck className="size-4 text-gold-400" />
+                <IconCheck className="size-4 shrink-0 text-elec-400" />
                 {g}
               </span>
             ))}

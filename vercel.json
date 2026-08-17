@@ -1,15 +1,29 @@
 {
-  "version": 3,
-  "rootDirectory": "site",
+  "version": 2,
   "builds": [
     {
-      "src": "package.json",
+      "src": "site/package.json",
       "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
+      "config": { "distDir": "site/dist" }
+    },
+    {
+      "src": "site/api/config.ts",
+      "use": "@vercel/node",
+      "config": { "maxDuration": 10 }
+    },
+    {
+      "src": "site/api/contact.ts",
+      "use": "@vercel/node",
+      "config": { "maxDuration": 10 }
+    },
+    {
+      "src": "site/api/wholesale.ts",
+      "use": "@vercel/node",
+      "config": { "maxDuration": 10 }
     }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/api/(.*)", "dest": "/site/api/$1" },
     { "src": "/(.*)", "dest": "/$1" }
   ]
 }

@@ -194,7 +194,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={status === 'sending'}
-                className="btn-glow mt-7 inline-flex w-full items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600 px-8 py-4 text-base font-bold text-onyx-950 shadow-gold-glow transition-all duration-300 hover:scale-[1.01] hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
+                className="btn-glow mt-7 inline-flex w-full items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-elec-400 via-elec-500 to-elec-600 px-8 py-4 text-base font-bold text-white shadow-elec-glow transition-all duration-300 hover:scale-[1.01] hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {status === 'sending' ? d.contact.sending : d.contact.submit}
                 {status !== 'sending' && <IconArrow className="size-5 rtl-flip" />}

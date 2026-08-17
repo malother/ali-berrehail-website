@@ -1,0 +1,22 @@
+# Sensitive files — do NOT deploy to Vercel
+config.json
+opencode.json
+
+# Local server files (not needed on Vercel)
+server.ps1
+start.bat
+run_server.cmd
+
+# Local data (user submissions)
+data/
+
+# Build outputs from other environments
+public/
+
+# Source maps and logs
+*.map
+*.log
+
+# Node artifacts
+node_modules/
+site/node_modules/

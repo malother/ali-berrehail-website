@@ -5,7 +5,7 @@ import { useLang } from '../i18n'
 /**
  * Executive profile photo container.
  * - Uses SITE_CONFIG.personalPhoto (centralized — swap one value to change the photo)
- * - Premium glass frame with metallic gold gradient + crimson corner brackets
+ * - Premium glass frame with electric-blue gradient + crimson corner brackets
  * - Elegant male 3D-business-avatar fallback when the photo is missing/failed
  */
 export default function ProfilePhoto({ className = '' }: { className?: string }) {
@@ -17,13 +17,13 @@ export default function ProfilePhoto({ className = '' }: { className?: string })
   return (
     <div className={`relative mx-auto w-full max-w-[380px] ${className}`}>
       {/* Rotating dashed orbit */}
-      <div className="animate-spin-slow absolute -inset-7 rounded-full border-2 border-dashed border-gold-500/25" aria-hidden="true" />
+      <div className="animate-spin-slow absolute -inset-7 rounded-full border-2 border-dashed border-elec-500/25" aria-hidden="true" />
 
       {/* Ambient glow */}
-      <div className="absolute -inset-5 rounded-[2.5rem] bg-gradient-to-br from-gold-500/25 to-crimson-500/25 blur-2xl" aria-hidden="true" />
+      <div className="absolute -inset-5 rounded-[2.5rem] bg-gradient-to-br from-elec-500/25 to-crimson-500/25 blur-2xl" aria-hidden="true" />
 
-      {/* Gold-crimson gradient frame */}
-      <div className="relative rounded-[2rem] bg-gradient-to-br from-gold-300 via-gold-600 to-crimson-500 p-[2.5px] shadow-2xl shadow-black/25">
+      {/* Elec-crimson gradient frame */}
+      <div className="relative rounded-[2rem] bg-gradient-to-br from-elec-300 via-elec-500 to-crimson-500 p-[2.5px] shadow-2xl shadow-black/25">
         <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[calc(2rem-2.5px)] bg-onyx-800">
           {photoReady ? (
             <img
@@ -54,13 +54,13 @@ function FallbackAvatar() {
       <svg viewBox="0 0 200 200" className="w-3/5" aria-hidden="true">
         <defs>
           <linearGradient id="suitGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#f8e08e" />
-            <stop offset="55%" stopColor="#d4af37" />
-            <stop offset="100%" stopColor="#8a6d1f" />
+            <stop offset="0%" stopColor="#a8c4f5" />
+            <stop offset="55%" stopColor="#3f7ee8" />
+            <stop offset="100%" stopColor="#1d3d80" />
           </linearGradient>
           <radialGradient id="halo" cx="50%" cy="35%" r="60%">
-            <stop offset="0%" stopColor="rgba(212,175,55,0.18)" />
-            <stop offset="100%" stopColor="rgba(212,175,55,0)" />
+            <stop offset="0%" stopColor="rgba(63,126,232,0.18)" />
+            <stop offset="100%" stopColor="rgba(63,126,232,0)" />
           </radialGradient>
         </defs>
         <circle cx="100" cy="100" r="96" fill="url(#halo)" />

@@ -192,9 +192,9 @@ function Earth({ lowPower, reducedMotion }: { lowPower: boolean; reducedMotion: 
       const curve = new THREE.QuadraticBezierCurve3(p1, mid, p2)
       const samples = 36
       for (let s = 0; s <= samples; s++) arcs.push(...curve.getPoint(s / samples).toArray())
-      pulses.push({ curve, t: (i * 0.13) % 1, speed: 0.045 + ((i * 0.021) % 0.03), color: i % 2 ? '#b32727' : '#c9a227' })
-      hubs.push({ pos: p1, color: i % 2 ? '#a32020' : '#c2982b' })
-      hubs.push({ pos: p2, color: i % 2 ? '#a32020' : '#c2982b' })
+      pulses.push({ curve, t: (i * 0.13) % 1, speed: 0.045 + ((i * 0.021) % 0.03), color: i % 2 ? '#b32727' : '#3f7ee8' })
+      hubs.push({ pos: p1, color: i % 2 ? '#a32020' : '#3f7ee8' })
+      hubs.push({ pos: p2, color: i % 2 ? '#a32020' : '#3f7ee8' })
     }
     const arcsG = new THREE.BufferGeometry()
     arcsG.setAttribute('position', new THREE.Float32BufferAttribute(arcs, 3))
@@ -240,11 +240,11 @@ function Earth({ lowPower, reducedMotion }: { lowPower: boolean; reducedMotion: 
       {/* Outer aura ring */}
       <mesh rotation={[Math.PI / 2.55, 0, -0.35]}>
         <torusGeometry args={[R * 1.34, 0.004, 8, 128]} />
-        <meshBasicMaterial color="#c9a227" transparent opacity={0.3} ref={ringMat} />
+        <meshBasicMaterial color="#3f7ee8" transparent opacity={0.3} ref={ringMat} />
       </mesh>
       <group ref={group}>
         <lineSegments geometry={latGeo}>
-          <lineBasicMaterial color="#c9a227" transparent opacity={0.4} ref={latMat} />
+          <lineBasicMaterial color="#3f7ee8" transparent opacity={0.4} ref={latMat} />
         </lineSegments>
         <lineSegments geometry={arcsGeo}>
           <lineBasicMaterial color="#b32727" transparent opacity={0.6} ref={arcsMat} />
@@ -293,7 +293,7 @@ function Network({ lowPower, reducedMotion }: { lowPower: boolean; reducedMotion
       const y = Math.sin(i * 1.9) * 0.55
       nodes.push({
         pos: new THREE.Vector3(Math.cos(angle) * radius, y, Math.sin(angle) * radius),
-        color: i % 2 === 0 ? '#c9a227' : '#b32727',
+        color: i % 2 === 0 ? '#3f7ee8' : '#b32727',
       })
     }
     const lines: THREE.Vector3[][] = []
@@ -338,15 +338,15 @@ function Network({ lowPower, reducedMotion }: { lowPower: boolean; reducedMotion
   return (
     <group position={[-2.6, 0.15, 0]} ref={group} visible={false}>
       <lineSegments geometry={connGeo}>
-        <lineDashedMaterial color="#7a5f16" dashSize={0.14} gapSize={0.1} transparent opacity={0} ref={connMat} />
+        <lineDashedMaterial color="#3f7ee8" dashSize={0.14} gapSize={0.1} transparent opacity={0} ref={connMat} />
       </lineSegments>
       <mesh>
         <torusGeometry args={[0.42, 0.02, 12, 48]} />
-        <meshStandardMaterial color="#c2982b" emissive="#c2982b" emissiveIntensity={0.5} metalness={0.7} roughness={0.3} ref={hubMat} />
+        <meshStandardMaterial color="#3f7ee8" emissive="#3f7ee8" emissiveIntensity={0.5} metalness={0.7} roughness={0.3} ref={hubMat} />
       </mesh>
       <mesh>
         <sphereGeometry args={[0.07, 16, 16]} />
-        <meshStandardMaterial color="#d9b95c" emissive="#c2982b" emissiveIntensity={1.2} />
+        <meshStandardMaterial color="#3f7ee8" emissive="#3f7ee8" emissiveIntensity={1.2} />
       </mesh>
       {nodes.map((n, i) => (
         <mesh key={`n-${i}`} position={n.pos}>
@@ -376,14 +376,13 @@ function Particles({ lowPower, reducedMotion }: { lowPower: boolean; reducedMoti
   const geo = useMemo(() => {
     const positions = new Float32Array(count * 3)
     const colors = new Float32Array(count * 3)
-    const gold = new THREE.Color('#c9a227')
     const crimson = new THREE.Color('#b32727')
-    const blue = new THREE.Color('#3a6fd6')
+    const blue = new THREE.Color('#3f7ee8')
     for (let i = 0; i < count; i++) {
       const v = new THREE.Vector3().randomDirection().multiplyScalar(2.2 + Math.random() * 5)
       positions.set([v.x, v.y, v.z], i * 3)
       const roll = Math.random()
-      const c = roll > 0.8 ? crimson : roll > 0.58 ? blue : gold
+      const c = roll > 0.8 ? crimson : roll > 0.55 ? blue : new THREE.Color('#6f9ef0')
       colors.set([c.r, c.g, c.b], i * 3)
     }
     const g = new THREE.BufferGeometry()
@@ -422,15 +421,15 @@ function DataChips({ lowPower, reducedMotion }: { lowPower: boolean; reducedMoti
   const chips = useMemo(() => {
     const base: Array<[number, number, number, string]> = lowPower
       ? [
-          [0.9, 1.25, -0.7, '#c9a227'],
+          [0.9, 1.25, -0.7, '#3f7ee8'],
           [2.5, 0.85, 0.3, '#3a6fd6'],
           [1.3, -1.1, 0.8, '#b32727'],
         ]
       : [
-          [0.9, 1.25, -0.7, '#c9a227'],
+          [0.9, 1.25, -0.7, '#3f7ee8'],
           [2.5, 0.85, 0.3, '#3a6fd6'],
           [1.3, -1.1, 0.8, '#b32727'],
-          [-0.7, 1.5, -1.2, '#c9a227'],
+          [-0.7, 1.5, -1.2, '#3f7ee8'],
           [0.25, -1.55, 0.15, '#3a6fd6'],
           [3.1, -0.4, -0.6, '#b32727'],
         ]
@@ -521,7 +520,7 @@ function Scene({ profile }: { profile: DeviceProfile }) {
       <Particles lowPower={profile.lowPower} reducedMotion={profile.reducedMotion} />
       <DataChips lowPower={profile.lowPower} reducedMotion={profile.reducedMotion} />
       <ambientLight intensity={0.7} />
-      <directionalLight position={[5, 6, 4]} intensity={1.5} color="#fff7e0" />
+      <directionalLight position={[5, 6, 4]} intensity={1.5} color="#cdd6f4" />
       <pointLight position={[-5, -3, -4]} intensity={18} color="#a32020" />
       <pointLight position={[4, 3, -5]} intensity={12} color="#3a6fd6" />
     </>

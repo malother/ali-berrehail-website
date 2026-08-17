@@ -22,7 +22,7 @@ export default function Logistics() {
           </Reveal>
           <Reveal delay={1}>
             <h2 className="mt-5 font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl">
-              {d.logistics.t1} <span className="text-gold-metal">{d.logistics.t2}</span>
+              {d.logistics.t1} <span className="text-elec-metal">{d.logistics.t2}</span>
             </h2>
           </Reveal>
           <Reveal delay={2}>
@@ -37,10 +37,10 @@ export default function Logistics() {
               const Icon = STEP_ICONS[i % STEP_ICONS.length]
               return (
                 <Reveal key={s.title} delay={(i % 2 ? 2 : 1) as 1 | 2}>
-                  <article className="glass group relative h-full overflow-hidden rounded-2xl p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold-500/40">
-                    <span className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-gold-500/70 to-transparent" aria-hidden="true" />
+                  <article className="glass group relative h-full overflow-hidden rounded-2xl p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-elec-500/40">
+                    <span className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-elec-500/70 to-transparent" aria-hidden="true" />
                     <div className="flex items-center justify-between">
-                      <span className="grid size-10 place-items-center rounded-xl bg-gradient-to-br from-gold-400/20 to-gold-600/20 text-gold-400 ring-1 ring-gold-500/30 transition-transform duration-300 group-hover:scale-110">
+                      <span className="grid size-10 place-items-center rounded-xl bg-gradient-to-br from-elec-400/20 to-elec-600/20 text-elec-400 ring-1 ring-elec-500/30 transition-transform duration-300 group-hover:scale-110">
                         <Icon className="size-5" />
                       </span>
                       <span className="font-display text-2xl font-extrabold text-white/10" aria-hidden="true">
@@ -64,17 +64,17 @@ export default function Logistics() {
 
             {/* Route line */}
             <div className="relative mx-auto mt-8 flex max-w-3xl items-center" aria-hidden="true">
-              <span className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-gold-500 via-gold-500/60 to-crimson-500" />
+              <span className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-elec-500 via-elec-500/60 to-crimson-500" />
               <div className="relative z-10 flex w-full items-center justify-between">
                 {[0, 1, 2, 3, 4, 5].map((i) => (
                   <span
                     key={i}
                     className={`grid size-7 place-items-center rounded-full border text-[10px] font-extrabold ${
                       i === 0
-                        ? 'border-gold-500 bg-gold-500 text-onyx-950'
+                        ? 'border-elec-500 bg-elec-500 text-white'
                         : i === 5
                           ? 'border-crimson-500 bg-crimson-500 text-[#ffffff]'
-                          : 'border-gold-500/50 bg-onyx-900 text-gold-400'
+                          : 'border-elec-500/50 bg-onyx-900 text-elec-400'
                     }`}
                   >
                     {i + 1}
