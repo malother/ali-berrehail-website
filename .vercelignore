@@ -7,8 +7,8 @@ server.ps1
 start.bat
 run_server.cmd
 
-# Local data (user submissions)
-data/
+# Local data (user submissions) — root-level only, preserves site/src/data/
+/data/
 
 # Build outputs from other environments
 public/
