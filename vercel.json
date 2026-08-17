@@ -1,7 +1,11 @@
 {
   "version": 2,
-  "outputDirectory": "site/dist",
   "builds": [
+    {
+      "src": "site/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "site/dist" }
+    },
     {
       "src": "site/api/config.ts",
       "use": "@vercel/node",
