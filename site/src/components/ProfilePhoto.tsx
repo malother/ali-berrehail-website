@@ -12,7 +12,7 @@ export default function ProfilePhoto({ className = '' }: { className?: string })
   const { d } = useLang()
   const [failed, setFailed] = useState(false)
 
-  const photoReady = SITE_CONFIG.personalPhoto !== 'PERSONAL_PHOTO_URL' && !failed
+  const photoReady = !failed
 
   return (
     <div className={`relative mx-auto w-full max-w-[380px] ${className}`}>

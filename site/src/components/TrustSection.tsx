@@ -1,7 +1,7 @@
 import { useLang } from '../i18n'
-import { SITE_CONFIG } from '../config'
 import Reveal from './Reveal'
 import Parallax from './Parallax'
+import AnaeQrCard from './AnaeQrCard'
 import { IconBolt, IconGlobe, IconShield } from './Icons'
 
 export default function TrustSection() {
@@ -11,7 +11,6 @@ export default function TrustSection() {
     {
       title: d.trustSection.b1t,
       sub: d.trustSection.b1s,
-      value: SITE_CONFIG.anaeId,
       icon: IconShield,
       tone: 'elec' as const,
     },
@@ -44,18 +43,16 @@ export default function TrustSection() {
                 </span>
                 <div className="text-center md:text-start" dir="ltr">
                   <p className="font-display text-2xl font-extrabold tracking-[0.14em] text-elec-metal">{d.trustSection.bannerT}</p>
-                  <p className="mt-1 text-sm text-slate-400">
-                    {d.trustSection.bannerS}{' '}
-                    <span className="rounded-md bg-onyx-950/80 px-2 py-0.5 font-bold tracking-wider text-elec-300 ring-1 ring-elec-500/30">
-                      {SITE_CONFIG.anaeId}
-                    </span>
-                  </p>
+                  <p className="mt-1 text-sm text-slate-400">{d.trustSection.bannerS}</p>
                 </div>
               </div>
             </div>
             <p className="mt-3 text-center text-xs text-slate-600">{d.trustSection.bannerNote}</p>
           </Reveal>
         </Parallax>
+
+        {/* Official ANAE verification QR card */}
+        <AnaeQrCard />
 
         {/* Three trust badges */}
         <Parallax range={28}>
@@ -77,11 +74,6 @@ export default function TrustSection() {
                   />
                   <p className="mt-3.5 text-sm font-bold text-white">{b.title}</p>
                   <p className={`mt-1.5 text-xs leading-relaxed ${crimson ? 'text-crimson-300/80' : 'text-elec-300/80'}`}>{b.sub}</p>
-                  {b.value && (
-                    <p className="mt-1.5 text-xs text-slate-500" dir="ltr">
-                      ID: {b.value}
-                    </p>
-                  )}
                 </div>
               </Reveal>
             )

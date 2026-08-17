@@ -4,5 +4,8 @@
   "scripts": {
     "build": "npm --prefix site run build",
     "postinstall": "npm --prefix site install"
+  },
+  "devDependencies": {
+    "wrangler": "^4.123.0"
   }
 }

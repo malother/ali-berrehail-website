@@ -8,15 +8,17 @@ export const SITE_CONFIG = {
   brandTag: 'B2B · Food Sourcing',
   positioning:
     'Elite B2B E-commerce Marketing & International Food Sourcing Consultancy',
-  // Replace this value with the URL/path of the real photo (jpg/png/webp).
-  // The layout and fallback avatar never change when this value is swapped.
-  personalPhoto: 'PERSONAL_PHOTO_URL',
+  // Official personal photo — original source, byte-identical copy of the
+  // user's file. The layout and fallback avatar never change when this is swapped.
+  personalPhoto: '/assets/images/ali-berrehail.jpg',
   email: 'a.ecommerce@outlook.fr',
   whatsappNumber: '213555231119',
   whatsappDisplay: '+213 555 23 11 19',
   phone: '+213 664 58 28 45',
   phoneRaw: 'tel:+213664582845',
   anaeId: '109404******6109',
+  // Official ANAE verification QR — original image, never regenerated.
+  anaeQr: '/assets/images/anae-qr.png',
   location: 'Algeria',
 } as const
 
@@ -36,6 +38,7 @@ export const ASSETS = {
   heroVideo: '/Mol/hero-background.mp4',
   heroPoster: '/Mol/hero-poster.jpg',
   personalPhoto: '/assets/images/ali-berrehail.jpg',
+  anaeQr: '/assets/images/anae-qr.png',
 } as const
 
 /**
@@ -43,7 +46,8 @@ export const ASSETS = {
  * (name, purpose, source, path, status)
  */
 export const ASSET_MANIFEST = [
-  { name: 'ali-berrehail.jpg', purpose: 'Executive profile photo', source: 'user upload', path: ASSETS.personalPhoto, status: 'pending' },
+  { name: 'ali-berrehail.jpg', purpose: 'Executive profile photo', source: 'user upload', path: ASSETS.personalPhoto, status: 'active' },
+  { name: 'anae-qr.png', purpose: 'Official ANAE verification QR (original, unmodified)', source: 'user upload', path: ASSETS.anaeQr, status: 'active' },
   { name: 'global-trade.glb', purpose: 'Hero 3D model', source: 'optional (ComfyUI/Kaggle or purchased)', path: ASSETS.heroModel, status: 'procedural Three.js in use' },
   { name: 'global-sourcing.glb', purpose: 'Sourcing 3D model', source: 'optional (ComfyUI/Kaggle or purchased)', path: ASSETS.sourcingModel, status: 'procedural Three.js in use' },
   { name: 'Mol/hero-background.mp4', purpose: 'Hero cinematic loop (all devices)', source: 'user upload', path: ASSETS.heroVideo, status: 'active' },

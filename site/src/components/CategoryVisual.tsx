@@ -1,11 +1,8 @@
 /**
- * CategoryVisual — local, license-clean fallback visuals for the 17 sourcing
- * categories. Hand-crafted vector art in the light-premium palette
- * (ivory / champagne / gold / crimson / graphite). Zero network dependency.
- *
- * If real photography becomes available later, replace <CategoryVisual> with
- * an <img src={`/assets/images/categories/${id}.webp`}> — the card layout
- * already supports it.
+ * CategoryVisual — local, license-clean vector fallback art for the 17
+ * sourcing categories. Used automatically by <CatalogImage> whenever the
+ * real catalog photo (site/public/assets/catalog/catalog-<slug>.webp)
+ * is not present. Zero network dependency.
  */
 import type { ReactNode } from 'react'
 import type { CategoryId } from '../data/catalog'

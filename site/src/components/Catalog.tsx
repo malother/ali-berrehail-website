@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { useLang } from '../i18n'
 import { CATEGORY_COUNT, CATEGORY_IDS, CATEGORY_META, type CategoryId } from '../data/catalog'
 import { IconCheck, IconClose, IconSearch } from './Icons'
-import CategoryVisual from './CategoryVisual'
+import CatalogImage from './CatalogImage'
 import Reveal from './Reveal'
 import Parallax from './Parallax'
 import { SITE_CONFIG } from '../config'
@@ -43,7 +43,7 @@ function CatalogCard({
 
       {/* Visual */}
       <div className="relative aspect-[4/3] overflow-hidden rounded-xl transition-transform duration-500 group-hover:scale-[1.03]">
-        <CategoryVisual id={id} />
+        <CatalogImage id={id} name={item.name} />
         <span className="absolute right-3 top-3 rounded-full bg-[rgba(255,253,248,0.92)] px-2.5 py-1 text-[10px] font-bold tracking-wider text-[#262219] ring-1 ring-elec-500/40 shadow-sm" dir="ltr">
           {meta.origin}
         </span>

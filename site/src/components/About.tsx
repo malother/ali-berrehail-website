@@ -22,9 +22,6 @@ export default function About() {
               <IconShield className="size-6 text-elec-400" />
               <div>
                 <p className="text-sm font-bold text-elec-300">{d.trustSection.b1t}</p>
-                <p className="text-[11px] text-slate-500" dir="ltr">
-                  ID: {SITE_CONFIG.anaeId}
-                </p>
               </div>
             </div>
           </Reveal>
