@@ -10,8 +10,8 @@ run_server.cmd
 # Local data (user submissions) — root-level only, preserves site/src/data/
 /data/
 
-# Root-level build output (from local dev, not Vercel)
-^public/
+# Root-level build output (from local dev, not Vercel) — preserves site/public/ and site/dist/
+/public/
 
 # Source maps and logs
 *.map
