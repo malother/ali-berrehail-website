@@ -1,12 +1,13 @@
 $ErrorActionPreference = "Stop"
 
-$baseUrl = "https://ali-berrehail-website.vercel.app"
+# Use the DIRECT deployment URL first (not the alias)
+$baseUrl = "https://ali-berrehail-website-j8m5qb0sx-allaedine501-3303s-projects.vercel.app"
 
 $tests = @(
     @{ Name = "Homepage"; Uri = "$baseUrl/" },
     @{ Name = "Config API (GET)"; Uri = "$baseUrl/api/config" },
     @{ Name = "Hero Video"; Uri = "$baseUrl/Mol/hero-background.mp4" },
-    @{ Name = "CSS Asset"; Uri = "$baseUrl/assets/index-D6aLmP8U.css" },
+    @{ Name = "CSS Asset"; Uri = "$baseUrl/assets/index-CxjI7lmv.css" },
     @{ Name = "JS Asset"; Uri = "$baseUrl/assets/index-C9XRbpTD.js" },
     @{ Name = "UniverseCanvas JS"; Uri = "$baseUrl/assets/UniverseCanvas-Dgtu-mK3.js" },
     @{ Name = "Favicon"; Uri = "$baseUrl/favicon.svg" },
@@ -14,16 +15,25 @@ $tests = @(
     @{ Name = "OG Cover"; Uri = "$baseUrl/assets/og-cover.svg" }
 )
 
-Write-Host "=== Static File & API Tests ==="
+Write-Host "=== Static File & API Tests (Direct Deployment URL) ==="
+Write-Host "Base: $baseUrl"
+Write-Host ""
+
 foreach ($t in $tests) {
     try {
-        $r = Invoke-WebRequest -Uri $t.Uri -Method GET -UseBasicParsing -TimeoutSec 30 -MaximumRedirection 5
+        $r = Invoke-WebRequest -Uri $t.Uri -Method GET -UseBasicParsing -TimeoutSec 30 -MaximumRedirection 0
         Write-Host "PASS  $($t.Name): $($r.StatusCode) - $($r.RawContentLength) bytes"
+        if ($t.Name -eq "Config API (GET)") {
+            Write-Host "      Body: $($r.Content)"
+        }
     } catch {
         $err = $_.Exception
         if ($err.Response) {
             $status = $err.Response.StatusCode.value__
             Write-Host "FAIL  $($t.Name): $status"
+            if ($t.Name -eq "Config API (GET)" -and $status -eq 405) {
+                Write-Host "      Expected 405 (API expects POST only or GET works) - checking..."
+            }
         } else {
             Write-Host "ERROR $($t.Name): $($err.Message)"
         }
@@ -37,7 +47,8 @@ $sensitive = @(
     @{ Name = "opencode.json"; Uri = "$baseUrl/opencode.json" },
     @{ Name = "server.ps1"; Uri = "$baseUrl/server.ps1" },
     @{ Name = "start.bat"; Uri = "$baseUrl/start.bat" },
-    @{ Name = "run_server.cmd"; Uri = "$baseUrl/run_server.cmd" }
+    @{ Name = "run_server.cmd"; Uri = "$baseUrl/run_server.cmd" },
+    @{ Name = "data/messages.json"; Uri = "$baseUrl/data/messages.json" }
 )
 
 foreach ($t in $sensitive) {
@@ -76,12 +87,13 @@ try {
     $r = Invoke-WebRequest -Uri "$baseUrl/api/contact" -Method POST -UseBasicParsing -TimeoutSec 30 `
         -ContentType "application/json" -Body $payload
     Write-Host "PASS  Contact API POST: $($r.StatusCode) - $($r.Content)"
+    Write-Host "      Headers:" ($r.Headers | Where-Object { $_ -like "X-Admin-Key*" }) -join ", "
 } catch {
     $err = $_.Exception
     if ($err.Response) {
         $status = $err.Response.StatusCode.value__
         $body = ""
-        try { $body = (Get-Content -Raw -Stream $err.Response.GetResponseStream()).Substring(0, 200) } catch {}
+        try { $sr = New-Object System.IO.StreamReader($err.Response.GetResponseStream()); $body = $sr.ReadToEnd().Substring(0, 300) } catch {}
         Write-Host "FAIL  Contact API POST: $status - $body"
     } else {
         Write-Host "ERROR Contact API POST: $($err.Message)"
@@ -110,7 +122,7 @@ try {
     if ($err.Response) {
         $status = $err.Response.StatusCode.value__
         $body = ""
-        try { $body = (Get-Content -Raw -Stream $err.Response.GetResponseStream()).Substring(0, 200) } catch {}
+        try { $sr = New-Object System.IO.StreamReader($err.Response.GetResponseStream()); $body = $sr.ReadToEnd().Substring(0, 300) } catch {}
         Write-Host "FAIL  Wholesale API POST: $status - $body"
     } else {
         Write-Host "ERROR Wholesale API POST: $($err.Message)"
