@@ -7,7 +7,7 @@ export const SITE_CONFIG = {
   brand: 'BERREHAIL',
   brandTag: 'B2B · Food Sourcing',
   positioning:
-    'Elite B2B E-commerce Marketing & International Food Sourcing Consultancy',
+    'B2B E-commerce Marketing & International Food Sourcing Consultancy',
   // Official personal photo — original source, byte-identical copy of the
   // user's file. The layout and fallback avatar never change when this is swapped.
   personalPhoto: '/assets/images/ali-berrehail.jpg',

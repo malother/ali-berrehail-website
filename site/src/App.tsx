@@ -16,6 +16,7 @@ import PrivateLabel from './components/PrivateLabel'
 import Quality from './components/Quality'
 import Logistics from './components/Logistics'
 import About from './components/About'
+import Testimonials from './components/Testimonials'
 import TrustSection from './components/TrustSection'
 import CtaSection from './components/CtaSection'
 import Inquiry from './components/Inquiry'
@@ -58,6 +59,7 @@ export default function App() {
           <Quality />
           <Logistics />
           <About />
+          <Testimonials />
           <TrustSection />
           <CtaSection />
           <Inquiry />
