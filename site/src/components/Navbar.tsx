@@ -83,24 +83,11 @@ export default function Navbar() {
       >
         {/* Brand */}
         <a href="#home" className="group flex items-center gap-3" aria-label={SITE_CONFIG.name}>
-          <span className="relative grid size-10 place-items-center">
-            <svg viewBox="0 0 40 40" className="size-10 drop-shadow-[0_0_12px_rgba(63,126,232,0.45)] transition-transform duration-500 group-hover:rotate-12" aria-hidden="true">
-              <defs>
-                <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#f8e08e" />
-                  <stop offset="50%" stopColor="#d4af37" />
-                  <stop offset="100%" stopColor="#8a6d1f" />
-                </linearGradient>
-                <linearGradient id="crimsonGrad" x1="0" y1="1" x2="1" y2="0">
-                  <stop offset="0%" stopColor="#dc2626" />
-                  <stop offset="100%" stopColor="#991b1b" />
-                </linearGradient>
-              </defs>
-              <path d="M20 2 36 11v18L20 38 4 29V11Z" fill="url(#goldGrad)" opacity="0.95" />
-              <path d="M20 2v18m0 0L4 11m16 9 16-9M20 20v18" stroke="url(#crimsonGrad)" strokeWidth="1.4" fill="none" opacity="0.85" />
-              <path d="M20 14 30 9v12L20 26 10 21V9Z" fill="#05060a" opacity="0.55" />
-            </svg>
-          </span>
+          <img
+            src="/assets/brand/logo-marketflux.webp"
+            alt="MARKETFLUX logo"
+            className="size-10 rounded-full object-cover transition-transform duration-500 group-hover:rotate-12"
+          />
           <span className="leading-tight" dir="ltr">
             <span className="block font-display text-lg font-extrabold tracking-[0.12em] text-gold-metal">{SITE_CONFIG.brand}</span>
             <span className="block text-xs font-semibold tracking-[0.45em] text-crimson-500">{SITE_CONFIG.name.split(' ')[1]?.toUpperCase() ?? 'ALI'}</span>

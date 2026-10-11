@@ -39,17 +39,11 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <a href="#home" className="flex items-center gap-3" aria-label={SITE_CONFIG.name}>
-              <svg viewBox="0 0 40 40" className="size-10" aria-hidden="true">
-                <defs>
-                  <linearGradient id="fGold" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#f8e08e" />
-                    <stop offset="50%" stopColor="#d4af37" />
-                    <stop offset="100%" stopColor="#8a6d1f" />
-                  </linearGradient>
-                </defs>
-                <path d="M20 2 36 11v18L20 38 4 29V11Z" fill="url(#fGold)" opacity="0.95" />
-                <path d="M20 14 30 9v12L20 26 10 21V9Z" fill="#05060a" opacity="0.55" />
-              </svg>
+              <img
+                src="/assets/brand/logo-marketflux.webp"
+                alt="MARKETFLUX logo"
+                className="size-10 rounded-full object-cover"
+              />
               <span className="leading-tight" dir="ltr">
                 <span className="block font-display text-lg font-extrabold tracking-[0.12em] text-gold-metal">{SITE_CONFIG.brand}</span>
                 <span className="block text-xs font-semibold tracking-[0.45em] text-crimson-500">{SITE_CONFIG.name.split(' ')[1]?.toUpperCase() ?? 'ALI'}</span>
